@@ -19,17 +19,34 @@ public class ForecastFragment extends Fragment {
 		View view = inflater.inflate(R.layout.forecast_fragment, container, false);
 		view.setBackgroundColor(Color.WHITE);
 
-		LinearLayout ll = view.findViewById(R.id.linlayout);
-		ll.setOrientation(LinearLayout.VERTICAL);
+		LinearLayout vl = view.findViewById(R.id.vlayout);
+		vl.setBackgroundColor(Color.argb(50, 0, 100, 255));
+		vl.setOrientation(LinearLayout.VERTICAL);
 
-		TextView thursday = new TextView(getContext());
-		thursday.setText("Thursday");
-		ll.addView(thursday);
+		for (int i = 0; i < 5; i++) {
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.MATCH_PARENT, 100);
+			layoutParams.setMargins(40, 20, 40, 20);
 
-		ImageView icon = new ImageView(getContext());
-		icon.setImageResource(R.drawable.weather_ico);
-		ll.addView(icon);
+			LinearLayout hl = new LinearLayout(getContext());
+			vl.addView(hl, layoutParams);
 
+			TextView thursday = new TextView(getContext());
+			thursday.setText("Thursday");
+			hl.addView(thursday, new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 2f));
+
+			ImageView icon = new ImageView(getContext());
+			icon.setImageResource(R.drawable.weather_ico);
+			hl.addView(icon, new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 2f));
+
+			TextView info = new TextView(getContext());
+			info.setText("Cloudy\n12C - 15C");
+			hl.addView(info, new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1f));
+
+		}
 		return view;
 	}
 }
