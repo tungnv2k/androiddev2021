@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import vn.edu.usth.weather.R;
-import vn.edu.usth.weather.fragment.ForecastFragment;
+import vn.edu.usth.weather.adapter.HomeFragmentPagerAdapter;
 
 public class WeatherActivity extends AppCompatActivity {
 	public static final String TAG = "WeatherActivity";
@@ -16,8 +18,11 @@ public class WeatherActivity extends AppCompatActivity {
 		Log.i(TAG, "onCreate: called");
 		setContentView(R.layout.activity_main);
 
-		ForecastFragment forecastFragment = new ForecastFragment();
-		getSupportFragmentManager().beginTransaction().add(R.id.forecast_fragment, forecastFragment).commit();
+		PagerAdapter adapter = new HomeFragmentPagerAdapter(getSupportFragmentManager(), 1);
+		ViewPager pager = findViewById(R.id.pager);
+		pager.setOffscreenPageLimit(3);
+		pager.setAdapter(adapter);
+		pager.setCurrentItem(1);
 	}
 
 	@Override
