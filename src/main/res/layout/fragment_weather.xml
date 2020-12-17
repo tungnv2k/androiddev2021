@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#3000FF00"
+        android:background="@color/colorLightGreen"
         tools:context=".fragment.WeatherFragment">
 
     <TextView
@@ -12,19 +12,19 @@
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:text="12C\nCloudy"/>
+            android:text="@string/day_weather"/>
     <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_centerInParent="true"
             android:src="@drawable/weather_ico"
-            android:contentDescription="Weather Icon"/>
+            android:contentDescription="@string/weather_icon_desc"/>
     <TextView
             android:id="@+id/city_name"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:text="Hanoi"/>
+            android:text="@string/city_name"/>
 
 </RelativeLayout>

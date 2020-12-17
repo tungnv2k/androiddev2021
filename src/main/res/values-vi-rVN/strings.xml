@@ -1,0 +1,8 @@
+<resources>
+    <string name="day_weather">12C\nNhiều mây</string>
+    <string name="weather_icon_desc">Icon thời tiết</string>
+    <string name="city_name">Hà Nội</string>
+    <string name="dow_Thursday">Thứ năm</string>
+    <string name="weather_info">Nhiều mây\n12C - 15C</string>
+    <string name="app_name">USTH Thời tiết</string>
+</resources>

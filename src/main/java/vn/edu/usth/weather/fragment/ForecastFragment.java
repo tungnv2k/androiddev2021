@@ -31,7 +31,7 @@ public class ForecastFragment extends Fragment {
 			vl.addView(hl, layoutParams);
 
 			TextView thursday = new TextView(getContext());
-			thursday.setText("Thursday");
+			thursday.setText(R.string.dow_Thursday);
 			hl.addView(thursday, new LinearLayout.LayoutParams(
 					ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 2f));
 
@@ -41,7 +41,7 @@ public class ForecastFragment extends Fragment {
 					ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 2f));
 
 			TextView info = new TextView(getContext());
-			info.setText("Cloudy\n12C - 15C");
+			info.setText(R.string.weather_info);
 			hl.addView(info, new LinearLayout.LayoutParams(
 					ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
 
