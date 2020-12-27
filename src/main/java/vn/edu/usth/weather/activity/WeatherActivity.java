@@ -1,5 +1,6 @@
 package vn.edu.usth.weather.activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.media.MediaPlayer;
@@ -8,6 +9,10 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
@@ -27,14 +32,36 @@ public class WeatherActivity extends AppCompatActivity {
 		Log.i(TAG, "onCreate: called");
 		setContentView(R.layout.activity_main);
 
-		handleSoundFile();
-		playSoundFile();
+//		handleSoundFile();
+//		playSoundFile();
 
 		PagerAdapter adapter = new HomeFragmentPagerAdapter(getSupportFragmentManager(), 1);
 		ViewPager pager = findViewById(R.id.pager);
 		pager.setOffscreenPageLimit(3);
 		pager.setAdapter(adapter);
 		pager.setCurrentItem(1);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.refresh, menu);
+		getMenuInflater().inflate(R.menu.settings, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.menu_refresh:
+				Toast.makeText(this, R.string.refreshing, 3000).show();
+				return true;
+			case R.id.menu_settings:
+				Intent prefActivity = new Intent(this, PrefActivity.class);
+				startActivity(prefActivity);
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
 	}
 
 	private void playSoundFile() {

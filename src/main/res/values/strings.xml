@@ -5,4 +5,6 @@
     <string name="city_name">Hanoi</string>
     <string name="dow_Thursday">Thursday</string>
     <string name="weather_info">Cloudy\n12C - 15C</string>
+    <string name="preferences">Preferences</string>
+    <string name="refreshing">Refreshing</string>
 </resources>

@@ -5,4 +5,6 @@
     <string name="dow_Thursday">Thứ năm</string>
     <string name="weather_info">Nhiều mây\n12C - 15C</string>
     <string name="app_name">USTH Thời tiết</string>
+    <string name="preferences">Cài đặt</string>
+    <string name="refreshing">Đang load lại</string>
 </resources>
