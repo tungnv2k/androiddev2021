@@ -31,6 +31,24 @@ public class WeatherActivity extends AppCompatActivity {
 			Toast.makeText(getBaseContext(), content, Toast.LENGTH_SHORT).show();
 		}
 	};
+	final AsyncTask<String, Integer, String> asyncTask = new AsyncTask<String, Integer, String>() {
+		@Override
+		protected String doInBackground(String... urls) {
+			try {
+				// Simulate a long network access
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			return "Bienvenue sur Internet";
+		}
+
+		@Override
+		protected void onPostExecute(String response) {
+			super.onPostExecute(response);
+			Toast.makeText(getBaseContext(), response, Toast.LENGTH_SHORT).show();
+		}
+	};
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,9 +99,7 @@ public class WeatherActivity extends AppCompatActivity {
 	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.menu_refresh:
-				if (!t.isAlive()) {
-					callLongNetworkRequest();
-				}
+				asyncTask.execute("http://www.google.com");
 				return true;
 			case R.id.menu_settings:
 				Intent prefActivity = new Intent(this, PrefActivity.class);
