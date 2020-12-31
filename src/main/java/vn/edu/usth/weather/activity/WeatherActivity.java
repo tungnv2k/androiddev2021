@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.media.MediaPlayer;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Environment;
+import android.os.*;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -25,6 +23,14 @@ import java.util.Locale;
 
 public class WeatherActivity extends AppCompatActivity {
 	public static final String TAG = "WeatherActivity";
+	private Thread t;
+	final Handler handler = new Handler(Looper.getMainLooper()) {
+		@Override
+		public void handleMessage(Message msg) {
+			String content = msg.getData().getString("server_response");
+			Toast.makeText(getBaseContext(), content, Toast.LENGTH_SHORT).show();
+		}
+	};
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +48,28 @@ public class WeatherActivity extends AppCompatActivity {
 		pager.setCurrentItem(1);
 	}
 
+	private void callLongNetworkRequest() {
+		t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					// Simulate a long network access
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				// Response from server
+				Bundle bundle = new Bundle();
+				bundle.putString("server_response", "Bienvenue sur Internet");
+				// notify main thread
+				Message msg = new Message();
+				msg.setData(bundle);
+				handler.sendMessage(msg);
+			}
+		});
+		t.start();
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.refresh, menu);
@@ -53,7 +81,9 @@ public class WeatherActivity extends AppCompatActivity {
 	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.menu_refresh:
-				Toast.makeText(this, R.string.refreshing, 3000).show();
+				if (!t.isAlive()) {
+					callLongNetworkRequest();
+				}
 				return true;
 			case R.id.menu_settings:
 				Intent prefActivity = new Intent(this, PrefActivity.class);
